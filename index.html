@@ -2,56 +2,79 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Una pregunta especial 💘</title>
+  <title>¿Quieres estar conmigo? 💘</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      text-align: center;
       background-color: #fff0f5;
-      margin-top: 100px;
+      font-family: 'Comic Sans MS', cursive;
+      text-align: center;
+      padding: 40px;
+      color: #d6336c;
     }
+
     h1 {
-      color: #c71585;
+      font-size: 2.5em;
     }
-    .boton {
-      padding: 15px 30px;
-      font-size: 18px;
-      border-radius: 10px;
-      margin: 20px;
-      cursor: pointer;
+
+    .corazon {
+      font-size: 4em;
+      animation: latido 1s infinite;
+    }
+
+    button {
+      font-size: 1.2em;
+      padding: 10px 20px;
+      margin: 15px;
+      background-color: #ff99cc;
       border: none;
-      position: relative;
-    }
-    #si {
-      background-color: #ff69b4;
+      border-radius: 10px;
       color: white;
+      cursor: pointer;
+      transition: transform 0.3s ease;
     }
-    #no {
-      background-color: #ccc;
-      color: #444;
-      position: absolute;
+
+    button:hover {
+      transform: scale(1.1);
+    }
+
+    @keyframes latido {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.2); }
     }
   </style>
 </head>
 <body>
 
-  <h1>¿Quieres estar conmigo? 💞</h1>
-  <button id="si" class="boton" onclick="aceptar()">Sí 🥰</button>
-  <button id="no" class="boton" onmouseover="moverNo()">No 😢</button>
+  <h1>Hola 😊</h1>
+  <div class="corazon">❤️</div>
 
-  <h2 id="respuesta"></h2>
+  <p>He estado queriendo decirte algo...</p>
+  <p><strong>¿Quieres estar conmigo? 💖</strong></p>
+
+  <!-- Botones -->
+  <button onclick="responder(true)">Sí 💘</button>
+  <button onclick="responder(false)">No 😢</button>
+
+  <!-- 🎵 Audio (no suena hasta que presiona “Sí”) -->
+  <audio id="musica" src="https://maha02cyber.github.io/for_you/ParaTi.mp3"></audio>
 
   <script>
-    function aceptar() {
-      document.getElementById("respuesta").innerHTML = "¡Sabía que dirías que sí! 💖";
-    }
-
-    function moverNo() {
-      const noBtn = document.getElementById("no");
-      const x = Math.random() * (window.innerWidth - 100);
-      const y = Math.random() * (window.innerHeight - 100);
-      noBtn.style.left = `${x}px`;
-      noBtn.style.top = `${y}px`;
+    function responder(eleccion) {
+      if (eleccion) {
+        document.body.innerHTML = `
+          <h1>¡Siii! 😍</h1>
+          <div class="corazon">💖💖💖</div>
+          <p>¡Me has hecho muy feliz! 🎉</p>
+        `;
+        const musica = document.getElementById("musica");
+        musica.volume = 0.5;
+        musica.play();
+      } else {
+        document.body.innerHTML = `
+          <h1>Ohh 😢</h1>
+          <p>Está bien... gracias por tu sinceridad 🙏</p>
+        `;
+      }
     }
   </script>
 
