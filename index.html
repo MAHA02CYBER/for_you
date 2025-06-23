@@ -41,11 +41,6 @@
       0%, 100% { transform: scale(1); }
       50% { transform: scale(1.2); }
     }
-
-    #musica {
-      display: none;
-      margin-top: 20px;
-    }
   </style>
 </head>
 <body>
@@ -59,23 +54,21 @@
   <button onclick="responder(true)">Sí 💘</button>
   <button id="btnNo" onmouseover="moverBoton()">No 😢</button>
 
-  <!-- Audio oculto inicialmente -->
-  <audio id="musica" src="ParaTi.mp3" controls></audio>
-
   <script>
     function responder(eleccion) {
       if (eleccion) {
-        const musica = document.getElementById("musica");
         document.body.innerHTML = `
           <h1>¡Siiii! 😍</h1>
           <div class="corazon">💖💖💖</div>
           <p>¡Me has hecho muy feliz! 🎉</p>
-          <p>Toca el botón para escuchar esto que también es para ti 🎶👇</p>
         `;
 
-        // Añadir nuevamente el audio con controles
-        document.body.appendChild(musica);
-        musica.style.display = "block";
+        // Crear el audio y reproducirlo directamente
+        const musica = new Audio("https://maha02cyber.github.io/for_you/ParaTi.mp3");
+        musica.volume = 0.5;
+        musica.play().catch(err => {
+          console.log("Error al reproducir la música:", err);
+        });
       } else {
         alert("Noooo 😭, inténtalo otra vez jejeje");
       }
@@ -92,8 +85,9 @@
       boton.style.top = `${randomY}px`;
     }
   </script>
-
 </body>
 </html>
+
+
 
 
