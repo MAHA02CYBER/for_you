@@ -41,11 +41,6 @@
       0%, 100% { transform: scale(1); }
       50% { transform: scale(1.2); }
     }
-
-    #musica {
-      display: none;
-      margin-top: 20px;
-    }
   </style>
 </head>
 <body>
@@ -56,26 +51,30 @@
   <p>He estado queriendo decirte algo...</p>
   <p><strong>¿Quieres estar conmigo? 💖</strong></p>
 
+  <!-- Botones -->
   <button onclick="responder(true)">Sí 💘</button>
   <button id="btnNo" onmouseover="moverBoton()">No 😢</button>
 
-  <!-- Audio oculto inicialmente -->
-  <audio id="musica" src="ParaTi.mp3" controls></audio>
+  <!-- Audio oculto (cargado pero no reproducido aún) -->
+  <audio id="musica" src="ParaTi.mp3" preload="auto"></audio>
 
   <script>
     function responder(eleccion) {
       if (eleccion) {
-        const musica = document.getElementById("musica");
+        // Mostrar mensaje de felicidad
         document.body.innerHTML = `
           <h1>¡Siiii! 😍</h1>
           <div class="corazon">💖💖💖</div>
           <p>¡Me has hecho muy feliz! 🎉</p>
-          <p>Toca el botón para escuchar esto que también es para ti 🎶👇</p>
         `;
 
-        // Añadir nuevamente el audio con controles
-        document.body.appendChild(musica);
-        musica.style.display = "block";
+        // Reproducir audio
+        const musica = document.getElementById("musica");
+        musica.volume = 0.7;
+        musica.play().catch(err => {
+          alert("Activa el sonido o toca la pantalla para permitir el audio 🎵");
+          console.error("Error al reproducir música:", err);
+        });
       } else {
         alert("Noooo 😭, inténtalo otra vez jejeje");
       }
@@ -95,4 +94,6 @@
 
 </body>
 </html>
+
+
 
