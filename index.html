@@ -30,7 +30,7 @@
       border-radius: 10px;
       color: white;
       cursor: pointer;
-      transition: transform 0.3s ease;
+      position: relative;
     }
 
     button:hover {
@@ -53,28 +53,42 @@
 
   <!-- Botones -->
   <button onclick="responder(true)">Sí 💘</button>
-  <button onclick="responder(false)">No 😢</button>
+  <button id="btnNo" onmouseover="moverBoton()">No 😢</button>
 
-  <!-- 🎵 Audio (no suena hasta que presiona “Sí”) -->
+  <!-- Audio oculto -->
   <audio id="musica" src="https://maha02cyber.github.io/for_you/ParaTi.mp3"></audio>
 
   <script>
     function responder(eleccion) {
       if (eleccion) {
+        // Mostrar respuesta positiva
         document.body.innerHTML = `
-          <h1>¡Siii! 😍</h1>
+          <h1>¡Siiii! 😍</h1>
           <div class="corazon">💖💖💖</div>
           <p>¡Me has hecho muy feliz! 🎉</p>
         `;
+
+        // Reproducir música
         const musica = document.getElementById("musica");
         musica.volume = 0.5;
-        musica.play();
+        musica.play().catch(err => {
+          console.log("Error al reproducir música:", err);
+        });
       } else {
-        document.body.innerHTML = `
-          <h1>Ohh 😢</h1>
-          <p>Está bien... gracias por tu sinceridad 🙏</p>
-        `;
+        // Mensaje triste
+        alert("Noooo 😭, inténtalo otra vez jejeje");
       }
+    }
+
+    function moverBoton() {
+      const boton = document.getElementById("btnNo");
+      const maxX = window.innerWidth - 100;
+      const maxY = window.innerHeight - 100;
+      const randomX = Math.floor(Math.random() * maxX);
+      const randomY = Math.floor(Math.random() * maxY);
+      boton.style.position = "absolute";
+      boton.style.left = `${randomX}px`;
+      boton.style.top = `${randomY}px`;
     }
   </script>
 
